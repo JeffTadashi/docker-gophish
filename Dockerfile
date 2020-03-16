@@ -18,9 +18,13 @@ mv /root/go/src/github.com/gophish/gophish /opt && \
 rm -r /root/go && \
 apk del git go build-base
 
-# Fix config.json file
+# Fix config.json file. (All ports exposed, and default 80 changed to 8080)
 RUN \
 sed -i 's/127.0.0.1/0.0.0.0/g' config.json && \
 sed -i 's/80/8080/g' config.json
+
+# Create self-signed cert
+
+
 
 ENTRYPOINT ["/opt/gophish/gophish"]
