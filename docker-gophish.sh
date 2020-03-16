@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #Try to build nginx files from arguments alone and test.example.com template
 domain_array=("$@") 

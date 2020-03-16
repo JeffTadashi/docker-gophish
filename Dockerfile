@@ -7,10 +7,10 @@ LABEL description="TBD"
 # GoPhish will be receiving ports 3333,8080
 # Nginx will redirect HTTP to 127.0.0.1:8080
 
-# Initial updates
+# Initial updates and get Bash
 RUN \
 apk update && \
-apk add --upgrade --no-cache
+apk add --upgrade --no-cache bash
 
 # Basic GoPhish Install
 RUN \
