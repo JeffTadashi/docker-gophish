@@ -7,10 +7,14 @@ LABEL description="TBD"
 # GoPhish will be receiving ports 3333,8080
 # Nginx will redirect HTTP to 127.0.0.1:8080
 
-# Basic Install
+# Initial updates
 RUN \
 apk update && \
-apk add --upgrade --no-cache git go build-base && \
+apk add --upgrade --no-cache
+
+# Basic GoPhish Install
+RUN \
+apk add --no-cache git go build-base && \
 go get github.com/gophish/gophish && \
 cd /root/go/src/github.com/gophish/gophish && \
 go build && \
@@ -25,6 +29,9 @@ sed -i 's/80/8080/g' config.json
 
 # Create self-signed cert
 
+
+# NGINX install
+# apk add --no-cache nginx
 
 
 ENTRYPOINT ["/opt/gophish/gophish"]
