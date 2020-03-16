@@ -18,21 +18,30 @@ apk add --no-cache git go build-base && \
 go get github.com/gophish/gophish && \
 cd /root/go/src/github.com/gophish/gophish && \
 go build && \
-mv /root/go/src/github.com/gophish/gophish /opt && \
+mv /root/go/src/github.com/gophish/gophish /root/ && \
 rm -r /root/go && \
 apk del git go build-base
 
 # Fix config.json file. (All ports exposed, and default 80 changed to 8080)
 RUN \
-sed -i 's/127.0.0.1/0.0.0.0/g' config.json && \
-sed -i 's/80/8080/g' config.json
+sed -i 's/127.0.0.1/0.0.0.0/g' /root/gophish/config.json && \
+sed -i 's/80/8080/g' /root/gophish/config.json
 
 # Create self-signed cert
 
 
 # NGINX install
-# apk add --no-cache nginx
-# mkdir /run/nginx
-# nginx -g 'daemon off;'
+RUN \
+apk add --no-cache nginx && \
+mkdir /run/nginx
+# If running monitored service, use: nginx -g 'daemon off;'
+# However, we are running simple bash script, and nginx will be run un-monitored, whereas GoPhish will be monitored
 
-ENTRYPOINT ["/opt/gophish/gophish"]
+
+# Copy script and other initial files
+COPY docker-gophish.sh /root/gophish/
+RUN chmod +x /root/gophish/docker-gophish.sh
+
+EXPOSE 80 443 3333
+
+ENTRYPOINT ["/root/gophish/docker-gophish.sh"]
