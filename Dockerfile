@@ -39,6 +39,7 @@ apk del openssl
 RUN \
 apk add --no-cache nginx openssl certbot certbot-nginx && \
 mkdir /run/nginx && \
+mkdir /root/nginx-temp && \
 mkdir /etc/nginx/ssl && \
 openssl req -newkey rsa:2048 -nodes -keyout /etc/nginx/ssl/nginx-selfsigned.key -x509 -days 365 -out /etc/nginx/ssl/nginx-selfsigned.crt \
 -subj "/CN=nginx-selfsigned" && \
