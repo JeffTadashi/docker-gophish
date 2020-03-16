@@ -57,4 +57,6 @@ RUN chmod +x /root/gophish/docker-gophish.sh
 
 EXPOSE 80 443 3333
 
+WORKDIR /root/gophish/
+
 ENTRYPOINT ["/root/gophish/docker-gophish.sh"]
