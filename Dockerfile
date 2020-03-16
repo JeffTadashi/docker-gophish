@@ -32,6 +32,7 @@ sed -i 's/80/8080/g' config.json
 
 # NGINX install
 # apk add --no-cache nginx
-
+# mkdir /run/nginx
+# nginx -g 'daemon off;'
 
 ENTRYPOINT ["/opt/gophish/gophish"]
