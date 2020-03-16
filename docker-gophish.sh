@@ -1,9 +1,20 @@
 #!/bin/sh
 
-#Copy original custom config files into correct place
-cp /root/nginx-temp/*.conf /etc/nginx/conf.d/
-echo "/etc/nginx/conf.d/ contents are:"
+#Try to build nginx files from arguments alone and test.example.com template
+domain_array=("$@") 
+for i in "${domain_array[@]}"
+do
+    cp /root/nginx-temp/test.example.com.conf /etc/nginx/conf.d/$1.conf
+    sed -i "s/test.example.com/$1/g" /etc/nginx/conf.d/$1.conf
+done
+echo "/etc/nginx/conf.d/ contents now are:"
 ls -la /etc/nginx/conf.d/
+
+# Copy original custom config files into correct place
+# NO LONGER USING THIS METHOD! TO BE REMOVED
+# cp /root/nginx-temp/*.conf /etc/nginx/conf.d/
+# echo "/etc/nginx/conf.d/ contents are:"
+# ls -la /etc/nginx/conf.d/
 
 #Start nginx without monitoring
 nginx

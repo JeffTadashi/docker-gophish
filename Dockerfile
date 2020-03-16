@@ -52,6 +52,9 @@ apk del openssl
 COPY 00-default-blank-nginx.conf /etc/nginx/conf.d/
 RUN rm /etc/nginx/conf.d/default.conf
 
+# Copy blank example nginx file. To be used by script later to make each site's config.
+COPY test.example.com.conf /root/nginx-temp/
+
 # Copy shell startup script
 COPY docker-gophish.sh /root/gophish/
 RUN chmod +x /root/gophish/docker-gophish.sh

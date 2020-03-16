@@ -2,7 +2,7 @@
 Combined GoPhish and Nginx
 
 TODO:
-- Prevent nginx file from being configured back to host. Should be a one-way read only thing.
+- Automate sh script to build nginx files from scrath (as opposed to needed to volume them)
 
 Example docker run command:
 ```
